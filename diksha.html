@@ -1,0 +1,160 @@
+
+<!DOCTYPE HTML>
+<html>
+
+<body>
+    
+    <h1>
+        To-DO-LIST
+    </h1>
+    <div class="content">
+    <input type="date" id="day"/>
+    <input type="text" id="message"/>
+    <input type="button" value="Add Item" onclick="data();"/>
+
+    </div>
+    <input type="button" onclick="manipulations();" value="CREATE-TABLE" />
+
+    <p id="Data"></p>
+
+
+    
+</body>
+
+
+<style>
+.content 
+{
+    display:none;
+}
+</style>
+
+<script>
+
+
+table = document.createElement("table")
+table.setAttribute('Id','TABLE');
+table.border=1;
+table.style.border="1px solid black";
+   head=["Date","Description"];
+   row=document.createElement("TR");
+    row=table.insertRow(-1);
+var countt=0;
+    for(let index=0;index<head.length;index++)
+    {
+        header=document.createElement("TH");
+        header.innerHTML=head[index];
+        header.setAttribute("onclick","sort("+countt+")")
+         row.appendChild(header);
+         countt+=1;
+
+    }
+
+ 
+  count=0;
+
+
+function manipulations()
+{
+    var ele=document.getElementsByClassName("content")[0];
+   if(ele.style.display=="none")
+   {
+     ele.style.display="block";
+   }
+  else
+  {
+    ele.style.display="block";
+  }
+  
+}
+function delete_item(element)
+{
+    element.remove();
+}
+
+function data()
+{
+   
+    var arrdata = [];
+
+    var date=document.getElementById("day").value;
+    var text_area=document.getElementById("message").value;
+   
+    
+
+
+
+if(date == "" || text_area== "")
+{
+  alert("Description.....PLz.......");
+}    
+else 
+{
+    arrdata.push([date , text_area]);
+    for (let index=0;index<arrdata.length;index++){
+        var row = document.createElement("tr");
+        row=table.insertRow(-1);
+        row.setAttribute("id","row"+count);
+        for(let indexj=0;indexj<arrdata[index].length+1;indexj++){
+           if(indexj==2)
+           {
+            var new_cell = document.createElement("td");
+            new_cell = row.insertCell(-1);
+            var btn=document.createElement("button");
+            btn.setAttribute("onclick","delete_item(row"+count+")");
+            var a=document.createTextNode("remove");
+            btn.appendChild(a);
+            new_cell.appendChild(btn);
+          } 
+           else
+           {
+            var new_cell = document.createElement("td");            
+            new_cell = row.insertCell(-1);
+            new_cell.innerHTML=arrdata[index][indexj];
+           }
+            
+
+         }
+         count+=1;
+    }
+    table.appendChild(row);
+    document.body.appendChild(table);
+    
+}
+    
+}
+
+ //function sort(freq){
+    //switch(freq) {
+       // case 0:
+        
+        //head.sort(function(a,b){
+            //if(a.F_name<b.F_name)
+             // return -1;
+            //if(a.F_name>b.F_name)
+               //return 1;
+              //return 0;
+         // });
+       
+        
+      
+          //break;
+        //case 1:
+       // head.sort(function(a,b){
+            //if(a.Description<b.Description)
+              //return -1;
+           // if(a.Description>b.Description)
+               //return 1;
+              //return 0;
+          //});
+         
+         
+          //break;
+      //}
+      
+   //data();
+
+//}
+
+</script>
+</html>
